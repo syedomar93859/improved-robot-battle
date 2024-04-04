@@ -18,8 +18,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        Scene scene = new Scene(fxmlLoader.load());
         //Students edit here to set up the scene
+        stage.setTitle("Robot Wars World Editor v1.0");
         stage.setScene(scene);
         stage.show();
     }
