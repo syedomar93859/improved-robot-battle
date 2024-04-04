@@ -73,11 +73,11 @@
                 <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
               </textFill>
             </Label>
-                  <Button layoutX="90.0" layoutY="106.0" mnemonicParsing="false" onAction="#createGrid" prefHeight="26.0" prefWidth="125.0" text="Create New Battle" />
-                  <RadioButton layoutX="81.0" layoutY="364.0" mnemonicParsing="false" />
-                  <RadioButton layoutX="101.0" layoutY="161.0" mnemonicParsing="false" />
-                  <TextField layoutX="90.0" layoutY="75.0" prefHeight="26.0" prefWidth="125.0" />
-                  <TextField layoutX="90.0" layoutY="44.0" prefHeight="26.0" prefWidth="125.0" />
+                  <Button layoutX="90.0" layoutY="106.0" mnemonicParsing="false" onAction="#gridCreation" prefHeight="26.0" prefWidth="125.0" text="Create New Battle" />
+                  <RadioButton layoutX="81.0" layoutY="364.0" mnemonicParsing="false" onAction="#BattleMapButton" />
+                  <RadioButton layoutX="101.0" layoutY="161.0" mnemonicParsing="false" onAction="#BattleMapButton" />
+                  <TextField fx:id="column" layoutX="90.0" layoutY="75.0" prefHeight="26.0" prefWidth="125.0" />
+                  <TextField fx:id="row" layoutX="90.0" layoutY="44.0" prefHeight="26.0" prefWidth="125.0" />
                   <Label alignment="CENTER" layoutX="37.0" layoutY="46.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Rows" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" fx:id="x11" />
@@ -102,10 +102,10 @@
                         <Color red="0.624" green="0.624" blue="0.624" fx:id="x2111" />
                      </textFill>
                   </Label>
-                  <TextField layoutX="90.0" layoutY="200.0" prefHeight="26.0" prefWidth="125.0" />
-                  <TextField layoutX="90.0" layoutY="231.0" prefHeight="26.0" prefWidth="125.0" />
-                  <TextField layoutX="90.0" layoutY="262.0" prefHeight="26.0" prefWidth="125.0" />
-                  <ChoiceBox layoutX="90.0" layoutY="293.0" prefHeight="26.0" prefWidth="125.0" />
+                  <TextField fx:id="inputSymbol" layoutX="90.0" layoutY="200.0" prefHeight="26.0" prefWidth="125.0" />
+                  <TextField fx:id="predaConName" layoutX="90.0" layoutY="231.0" prefHeight="26.0" prefWidth="125.0" />
+                  <TextField fx:id="healthPredaCon" layoutX="90.0" layoutY="262.0" prefHeight="26.0" prefWidth="125.0" />
+                  <ChoiceBox fx:id="weaponMaximal" layoutX="90.0" layoutY="293.0" prefHeight="26.0" prefWidth="125.0" />
                   <Label alignment="CENTER" layoutX="27.0" layoutY="200.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Symbol" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" fx:id="x112" />
@@ -146,11 +146,11 @@
                         <Color red="0.624" green="0.624" blue="0.624" fx:id="x21111" />
                      </textFill>
                   </Label>
-                  <TextField layoutX="90.0" layoutY="394.0" prefHeight="26.0" prefWidth="125.0" />
-                  <TextField layoutX="90.0" layoutY="425.0" prefHeight="26.0" prefWidth="125.0" />
-                  <TextField layoutX="90.0" layoutY="456.0" prefHeight="26.0" prefWidth="125.0" />
-                  <TextField layoutX="90.0" layoutY="487.0" prefHeight="26.0" prefWidth="125.0" />
-                  <TextField layoutX="90.0" layoutY="518.0" prefHeight="26.0" prefWidth="125.0" />
+                  <TextField fx:id="maximal_symbol" layoutX="90.0" layoutY="394.0" prefHeight="26.0" prefWidth="125.0" />
+                  <TextField fx:id="nameMaximal" layoutX="90.0" layoutY="425.0" prefHeight="26.0" prefWidth="125.0" />
+                  <TextField fx:id="healthMaximal" layoutX="90.0" layoutY="456.0" prefHeight="26.0" prefWidth="125.0" />
+                  <TextField fx:id="Weapon_input" layoutX="90.0" layoutY="487.0" prefHeight="26.0" prefWidth="125.0" />
+                  <TextField fx:id="armorMaximal" layoutX="90.0" layoutY="518.0" prefHeight="26.0" prefWidth="125.0" />
                   <Label alignment="CENTER" layoutX="27.0" layoutY="394.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Symbol" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" fx:id="x1122" />
@@ -205,7 +205,7 @@
         <AnchorPane>
           <children>
             <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                  <TextArea layoutX="13.0" layoutY="41.0" prefHeight="188.0" prefWidth="188.0" />
+                  <TextArea fx:id="details" layoutX="13.0" layoutY="41.0" prefHeight="188.0" prefWidth="188.0" />
           </children>
         </AnchorPane>
       </items>

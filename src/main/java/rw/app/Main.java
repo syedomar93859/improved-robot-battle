@@ -6,7 +6,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/** Syed Omar
+ *  March 20, 2024
+ *  T12
+ */
 public class Main extends Application {
 
     public static final String version = "1.0";

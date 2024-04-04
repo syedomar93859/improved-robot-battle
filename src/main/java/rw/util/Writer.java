@@ -11,6 +11,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+/** Syed Omar
+ *  March 20, 2024
+ *  T12
+ */
 
 /**
  * Class to assist writing battle state to a file

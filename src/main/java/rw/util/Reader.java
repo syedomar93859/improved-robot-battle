@@ -6,6 +6,11 @@ import rw.enums.WeaponType;
 import java.io.*;
 import java.util.ArrayList;
 
+/** Syed Omar
+ *  March 20, 2024
+ *  T12
+ */
+
 /**
  * Class to assist reading in battle file
  * @author Jonathan Hudson

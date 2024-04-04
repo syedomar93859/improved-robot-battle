@@ -21,61 +21,71 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/** Syed Omar
+ *  March 20, 2024
+ *  T12
+ */
 public class MainController {
 
     //Store the data of editor
     private Battle battle;
+@FXML
+    private TextField column;
+@FXML
+    private TextField row;
 
     @FXML
-    private ToggleButton DetailsButton;
-
-    private String Symbol;
+    private TextField predaConSymbol;
 
     @FXML
-    private ToggleButton BattleMap;
+    private TextField predaConName;
+
+    @FXML
+    private TextField predaConHealth;
+
+    @FXML
+    private TextField maximalSymbol;
+
+    @FXML
+    private TextField maximalName;
+
+    @FXML
+    private TextField maximalHealth;
+
+    @FXML
+    private TextField maximalWeaponStrength;
+
+    @FXML
+    private TextField maximalArmourStrength;
+
+    @FXML
+    private ToggleButton detailsButton;
+
+    private String symbol;
+
+    @FXML
+    private ToggleButton battleMap;
 
     @FXML
     private MenuItem saveButton;
 
     @FXML
-    private TextArea Details;
+    private TextArea details;
 
     @FXML
-    private TextField HealthCon;
+    private Text maximal_health;
+
 
     @FXML
-    private TextField HealthMaximal;
+    private RadioButton maximalButton;
+
 
     @FXML
-    private Text Maximal_health;
+    private RadioButton predaConButton;
 
     @FXML
-    private TextField WeaponMaximal;
+    private TextField inputSymbol;
 
-    @FXML
-    private TextField ArmorMaximal;
-
-    @FXML
-    private RadioButton MaximalButton;
-
-    @FXML
-    private TextField NameMaximal;
-
-    @FXML
-    private TextField NameCon;
-
-    @FXML
-    private RadioButton PredaConButton;
-
-    @FXML
-    private TextField MaximalSymbol;
-
-    @FXML
-    private TextField SymbolInput;
-
-    @FXML
-    private TextField column;
 
     @FXML
     private GridPane gridPane;
@@ -91,9 +101,6 @@ public class MainController {
 
     @FXML
     private Text maximal_symbol;
-
-    @FXML
-    private TextField row;
 
     @FXML
     private Font x1;
@@ -122,9 +129,9 @@ public class MainController {
         row.setOnKeyTyped(event -> clearGrid());
         column.setOnKeyTyped(event -> clearGrid());
 
-        PredaConButton.setToggleGroup(group);
-        MaximalButton.setToggleGroup(group);
-        DetailsButton.setOnAction(this::onViewDetailsPressed);
+        predaConButton.setToggleGroup(group);
+        maximalButton.setToggleGroup(group);
+        detailsButton.setOnAction(this::onViewDetailsPressed);
 
         // adds the claws, laser and teeth to the weapon options
         Weapon_input.getItems().addAll("Claw(2)", "Laser(3)", "Teeth(4)");
@@ -133,20 +140,20 @@ public class MainController {
         Weapon_input.setValue("Claw(2)");
 
         // gets the first value for symbol
-        Symbol = SymbolInput.getText();
+        symbol = inputSymbol.getText();
 
         // sees which changes the toggle group does
         group.selectedToggleProperty().addListener((observable, oldToggle, newToggle) -> {
             if (newToggle != null) {
                 RadioButton selectedRadioButton = (RadioButton) newToggle;
-                Symbol = selectedRadioButton.getText();
+                symbol = selectedRadioButton.getText();
                 // Update currentSymbol based on the selected RadioButton
-                if (PredaConButton.isSelected()) {
-                    Symbol = SymbolInput.getText();
+                if (predaConButton.isSelected()) {
+                    symbol = inputSymbol.getText();
                     leftStatus.setText("Currently adding PredaCons");
                     rightStatus.setText("Add / create to make a battle");
-                } else if (MaximalButton.isSelected()) {
-                    Symbol = MaximalSymbol.getText();
+                } else if (maximalButton.isSelected()) {
+                    symbol = maximalSymbol.getText();
                     leftStatus.setText("Currently adding Maximal");
                     rightStatus.setText("Add / create to make a battle");
                 }
@@ -169,7 +176,7 @@ public class MainController {
      */
     @FXML
     void RowInput(ActionEvent event) {
-        createGrid();
+        gridCreation();
     }
 
     /**
@@ -178,7 +185,7 @@ public class MainController {
      */
     @FXML
     void ColumnInput(ActionEvent event) {
-        createGrid();
+        gridCreation();
     }
 
     @FXML
@@ -238,7 +245,7 @@ public class MainController {
      * add right and left status to let the user know of the status
      */
     @FXML
-    void createGrid() {
+    void gridCreation() {
         try {
             // adds the walls in our grid
             int rows = Integer.parseInt(row.getText().trim()) + 2;
@@ -304,8 +311,8 @@ public class MainController {
             gridPane.getChildren().clear();
 
             // Set up row and column constraints for equal sizing
-            setupRowConstraints(rows);
-            setupColumnConstraints(columns);
+            setUpRowConstraints(rows);
+            setUpColumnConstraints(columns);
 
             // Populate grid with buttons
             for (int row = 0; row < rows; row++) {
@@ -367,10 +374,10 @@ public class MainController {
      * we have 2 types of radio buttons, predaCon and maximal
      */
     private String getSelectedSymbol() {
-        if (PredaConButton.isSelected()) {
-            return SymbolInput.getText();
-        } else if (MaximalButton.isSelected()) {
-            return MaximalSymbol.getText();
+        if (predaConButton.isSelected()) {
+            return inputSymbol.getText();
+        } else if (maximalButton.isSelected()) {
+            return maximalSymbol.getText();
         }
         return "";
     }
@@ -380,7 +387,7 @@ public class MainController {
      * makes sure they are equal sizes
      * @param rows , rowns in the grid
      */
-    private void setupRowConstraints(int rows) {
+    private void setUpRowConstraints(int rows) {
         gridPane.getRowConstraints().clear();
         for (int i = 0; i < rows; i++) {
             RowConstraints rc = new RowConstraints();
@@ -391,10 +398,9 @@ public class MainController {
 
     /**
      * Sets up column constraints on the grid
-     * makes sure they are equal sizes
      * @param columns, column in the map
      */
-    private void setupColumnConstraints(int columns) {
+    private void setUpColumnConstraints(int columns) {
         gridPane.getColumnConstraints().clear();
         for (int i = 0; i < columns; i++) {
             ColumnConstraints cc = new ColumnConstraints();
@@ -404,52 +410,52 @@ public class MainController {
     }
 
     /**
-     * gets the details of the predaCon or maximal buttons and inputs
+     * This method give details about either the  predaCon or Maximal
      * gives general information of the input the user entered
      * @param event
      */
     @FXML
     private void onViewDetailsPressed(ActionEvent event) {
         try {
-            if (PredaConButton.isSelected()) {
+            if (predaConButton.isSelected()) {
                 // if Predacon button is selected, get the health
-                int health = Integer.parseInt(HealthCon.getText());
+                int health = Integer.parseInt(predaConHealth.getText());
 
                 // BOTH SHOULD BE in letters and not numeric
-                if (isNumeric(SymbolInput.getText()) || isNumeric(NameCon.getText())) {
+                if (isNumeric(inputSymbol.getText()) || isNumeric(predaConName.getText())) {
                     throw new NumberFormatException("Symbol and Name should not be numeric.");
                 }
 
-                Details.setText("Symbol: " + SymbolInput.getText() + "\n" +
-                        "Name: " + NameCon.getText() + "\n" +
+                details.setText("Symbol: " + inputSymbol.getText() + "\n" +
+                        "Name: " + predaConName.getText() + "\n" +
                         "Health: " + health + "\n" +
                         "Weapon: " + Weapon_input.getValue());
-            } else if (MaximalButton.isSelected()) {
+            } else if (maximalButton.isSelected()) {
                 // checks if all 3 are valid integers
-                int health = Integer.parseInt(HealthMaximal.getText());
-                int weaponStrength = Integer.parseInt(WeaponMaximal.getText());
-                int armorStrength = Integer.parseInt(ArmorMaximal.getText());
+                int weaponStrength = Integer.parseInt(maximalWeaponStrength.getText());
+                int health = Integer.parseInt(maximalHealth.getText());
+                int armorStrength = Integer.parseInt(maximalArmourStrength.getText());
 
                 // checks if Symbol and Name are not integers
-                if (isNumeric(MaximalSymbol.getText()) || isNumeric(NameMaximal.getText())) {
-                    throw new NumberFormatException("Symbol and Name should not be numeric.");
+                if (isNumeric(maximalSymbol.getText()) || isNumeric(maximalName.getText())) {
+                    throw new NumberFormatException("Symbol and name should not be numeric.");
                 }
 
-                Details.setText("Symbol: " + MaximalSymbol.getText() + "\n" +
-                        "Name: " + NameMaximal.getText() + "\n" +
+                details.setText("Symbol: " + maximalSymbol.getText() + "\n" +
+                        "Name: " + maximalName.getText() + "\n" +
                         "Health: " + health + "\n" +
                         "Weapon Strength: " + weaponStrength + "\n" +
                         "Armor: " + armorStrength);
             } else {
-                Details.setText("Select a character type to view details.");
+                details.setText("Select a character type to view details.");
             }
         } catch (NumberFormatException e) {
-            Details.setText("Error: " + e.getMessage());
+            details.setText("Error: " + e.getMessage());
         }
     }
 
     /**
-     *
+     *Checks to see if the value in a string is a number
      * @param str
      * @return
      */
@@ -463,14 +469,14 @@ public class MainController {
     }
 
     /**
-     * gets the alert of the menu help option in the menu
+     * Considers the alert of the menu help option
      * @param event
      */
     @FXML
     void Help(ActionEvent event){
-        // type of alert is information because it is general info
+        // Alert will INFORMATION, because the info is general
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        // sets title of the pop up window
+        // sets title and header of the opened window
         alert.setTitle("About");
         alert.setHeaderText("Message");
         alert.setContentText(
@@ -484,7 +490,7 @@ public class MainController {
     }
 
     /**
-     * quits the gui if the option is pressed
+     * This method will exit the GUI
      * @param event
      */
     @FXML
@@ -492,4 +498,4 @@ public class MainController {
         // if the user pressed quit option in the menu option, closes the gui and window
         System.exit(1);
     }
-    }
+}
